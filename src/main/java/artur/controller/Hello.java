@@ -2,6 +2,7 @@ package artur.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -24,6 +25,10 @@ public class Hello {
         }
 		return "hello/hello123";
     }
+    
+	public static void main(String[] args) throws Exception {
+		SpringApplication.run(Hello.class, args);
+	}
  
 }
 
