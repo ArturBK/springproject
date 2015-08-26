@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @SpringBootApplication
 public class Hello {
  
-	
     @RequestMapping(value = "/hello")
     public String hello(
 		Model model,
@@ -31,5 +30,4 @@ public class Hello {
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Hello.class, args);
 	}
- 
 }
