@@ -1,32 +1,45 @@
 package artur.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.io.InputStream;
+
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.core.MediaType;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.RequestMapping;
- 
-@Controller
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@ComponentScan("artur.controller")
 @SpringBootApplication
 public class Hello {
- 
-    @RequestMapping(value = "/hello")
-    public String hello(
-		Model model,
-		@CookieValue(value = "abc", defaultValue = "") String abc,  HttpServletRequest request){
-		try {
+		
 
-    		model.addAttribute("qwerty", "qwerty");
- 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-		return "hello/hello123";
-    }
-    
+	
+	@RequestMapping("/")
+	String home() {
+		return "ok";
+	}
+
+	@RequestMapping("/hello")
+	@POST
+	@Consumes(MediaType.APPLICATION_OCTET_STREAM)
+	@NotNull
+	String process(InputStream file) {
+		return "";
+	}
+		
+	@GET
+	@RequestMapping("/goodBy")
+	String populateFinTable(InputStream file) {
+		return "OK";
+	}
+
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Hello.class, args);
 	}
