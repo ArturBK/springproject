@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.boot.SpringApplication;
@@ -30,13 +31,19 @@ public class Hello {
 	@POST
 	@Consumes(MediaType.APPLICATION_OCTET_STREAM)
 	@NotNull
-	String process(InputStream file) {
+	String hello(InputStream file) {
 		return "";
 	}
 		
 	@GET
 	@RequestMapping("/goodBy")
-	String populateFinTable(InputStream file) {
+	String goodby(InputStream file) {
+		return "OK";
+	}
+	
+	@PUT
+	@RequestMapping("/putStufs")
+	String putStufs(InputStream file) {
 		return "OK";
 	}
 
