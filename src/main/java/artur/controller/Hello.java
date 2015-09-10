@@ -10,18 +10,31 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@RestController
-@ComponentScan("artur.controller")
-@SpringBootApplication
+import artur.resource.Greeting;
+
+@Controller
 public class Hello {
 		
+	private static final String TEMPLATE = "Hello, %s!";
 
-	
+    @RequestMapping("/greeting")
+    @ResponseBody
+    public HttpEntity<Greeting> greeting(
+            @RequestParam(value = "name", required = false, defaultValue = "World") String name) {
+
+        Greeting greeting = new Greeting(String.format(TEMPLATE, name));
+        greeting.add(linkTo(methodOn(Hello.class).greeting(name)).withSelfRel());
+
+        return new ResponseEntity<Greeting>(greeting, HttpStatus.OK);
+    }
 	@RequestMapping("/")
 	String home() {
 		return "ok";
